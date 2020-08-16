@@ -1,0 +1,64 @@
+{
+  "actionType": {
+    "PENDING": "SAVE_NEWS_DRAFT_PENDING",
+    "SUCCESS": "SAVE_NEWS_DRAFT_SUCCESS",
+    "FAILURE": "SAVE_NEWS_DRAFT_FAILURE",
+    "type": "SAVE_NEWS_DRAFT"
+  },
+  "query": "mutation saveNewsDraft($newsDraft: newsItemDraftInputType!, $newsDraftId: String!, $classificationId: String!, $tags: [String], , $links: [LinkBaseType!]){  newsItem{    updateDraft(newsItemDraft: $newsDraft){      body        priorityEnumId        reliabilityEnumId        sourceEnumId        sourceName        sourceCredibilityEnumId        subject        typeEnumId        crimeTypeEnumIds        occurrenceTime {          startTime          endTime        }        id        locations{          address{            floor            state            colony            street            postalCode            country            district            settlement            description            neighborhood            externalNumber            internalNumber            apartmentNumber          }          addressMeta{            country            state            district            settlement            street            externalNumber          }          time{            from            to          }          description          locationGeometries{            point{              type              coordinates            }            polygon{              type              coordinates            }            description          }      }    }  }  permissions{  setClassification(setClassificationInput: {classification: $classificationId, entityId: $newsDraftId})}tags{  setTags(setTagsInput:{entityId: $newsDraftId,tagEnumIds: $tags}){    tagEnumId  }}links {  setLinks(setLinkBaseType: {links: $links, sourceId: $newsDraftId})}}",
+  "variables": {
+    "newsDraft": {
+      "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+      "priorityEnumId": "priority_normal",
+      "reliabilityEnumId": "news_reliability_4",
+      "sourceEnumId": "news_source_1",
+      "sourceName": "test",
+      "sourceCredibilityEnumId": "news_srce_crdibility_4",
+      "subject": "news",
+      "typeEnumId": "news_type_general_info",
+      "crimeTypeEnumIds": [
+        "crime_type_21"
+      ],
+      "occurrenceTime": null,
+      "id": "NI224"
+    },
+    "newsDraftId": "NI224",
+    "classificationId": "classification_0",
+    "tags": [],
+    "links": [
+      {
+        "id": null,
+        "sourceId": "NI224",
+        "sourceType": "NewsItem",
+        "targetId": "PH1544",
+        "targetType": "Phone",
+        "relationType": "entity_rel",
+        "relationValue": "entity_rel_1",
+        "intensity": 4,
+        "reliability": 4,
+        "isNew": true,
+        "direction": 1,
+        "toDelete": false
+      }
+    ]
+  },
+  "onSuccessAction": [
+    {
+      "type": "GRAPHQL_QUERY",
+      "payload": {
+        "actionType": {
+          "PENDING": "GET_NEWS_ITEM_DRAFT_PENDING",
+          "SUCCESS": "GET_NEWS_ITEM_DRAFT_SUCCESS",
+          "FAILURE": "GET_NEWS_ITEM_DRAFT_FAILURE",
+          "type": "GET_NEWS_ITEM_DRAFT"
+        },
+        "query": "query getNewsDraft{  newsItem{    getNewsItemDraft{       newsItemDraft{         body        priorityEnumId        reliabilityEnumId        sourceEnumId        sourceName        sourceCredibilityEnumId        subject        typeEnumId        crimeTypeEnumIds        occurrenceTime {          startTime          endTime        }        id        locations{          address{            floor            state            colony            street            postalCode            country            district            settlement            description            neighborhood            externalNumber            internalNumber            apartmentNumber          }          addressMeta{            country            state            district            settlement            street            externalNumber          }          time{            from            to          }          description          locationGeometries{            point{              type              coordinates            }            polygon{              type              coordinates            }            description          }      }       }       tags{        tagEnumId       }       classificationDetails{        classificationValue        enumId       }       links {        idsourceIdsourceTypetargetTypetargetIdrelationTyperelationValueinverseIdintensityreliabilitystartDateendDateorigindirectioncommenttarget {  entityId  entityType  permissionLevel  userId  entityBody {    ... on AssetType {      assetName: name      id      type      description      area      location {        address{  floor  state  colony  street  postalCode  country  district  settlement  description  neighborhood  externalNumber  internalNumber  postalCode}locationGeometries{  point{    type    coordinates  }  polygon{    type    coordinates  }  description}      }    }    ... on FileType {      id      fileType      description      format      created {        path        userId        timestamp        user {          userName          displayName        }        value      }      updated {        timestamp        user {          userName          displayName        }      }      frozen {        path        userId        timestamp        user {          userName          displayName        }        value      }      frozenReason      fileName: name      version {        major,        minor      }    }     ... on ReportFileType {       id       fileType       reportType       description       format       reportName: name       created {         path         userId         timestamp         user {           userName           displayName         }         value       }       version {         major         minor       }     }    ... on PersonType {      id      description      CurpNumber      addresses {        address{  floor  state  colony  street  postalCode  country  district  settlement  description  neighborhood  externalNumber  internalNumber  postalCode}locationGeometries{  point{    type    coordinates  }  polygon{    type    coordinates  }  description}      }      name {        firstName        lastName        fatherLastName        motherLastName      }      dateOfBirth      dateOfDeath      gender      nationality      pictureDocId      alsoKnownAs    }    ... on VehicleType {      id      type      description      licensePlateNumber      brand      model      color    }    ... on WeaponType {      id      type      description      serialNumber      caliber      model      brand    }    ... on PhoneType {      id      type      description      Imei      Imsi      operatorName      number    }    ... on OrganizationType {      id      companyId      type      membersCount      companyName: name      status      pictureDocId      areasOfOperation      locations {        address{  floor  state  colony  street  postalCode  country  district  settlement  description  neighborhood  externalNumber  internalNumber  postalCode}locationGeometries{  point{    type    coordinates  }  polygon{    type    coordinates  }  description}      }    }    ... on PirType {      id      pirName      pirRequest {        pirType        priority        requiredDueDate      }      created {        userId        timestamp        user {          userName          displayName        }      }      workflow {        workflow {          state          wfExternalSystemStatus          externalSystemType        }      }    }    ... on NewsItemType {      id      description      subject      publishDate      priorityEnumId      sourceEnumId      typeEnumId      state      body      reliabilityEnumId      created {        timestamp        user {          userName          displayName        }      }    }    ... on CaseType {      id      type      description      caseName: name      description      summary      sourceSystemKey      sourceSystem      priority      crimeCharacteristics      sourceDocumentId      sourceUserId      initialData      crimeTypes      deleted {        user {          displayName          isBanned        }        timestamp      }      created {        timestamp        user {          userName          displayName          roles        }      }      updated {        timestamp        user {          userName          displayName          roles        }      }    }    ... on OrderType {      id      type      description      orderName: name      summary            priority      initialData      crimeTypes      deleted {        user {          displayName          isBanned        }        timestamp      }      created {        timestamp        user {          userName          displayName          roles        }      }      updated {        timestamp        user {          userName          displayName          roles        }      }    }    ... on FolderType {      id      description      created {        path        userId        timestamp        user {          userName          displayName        }        value      }      folderName: name    }  }}       }    }  }}"
+      },
+      "meta": {
+        "errorIgnoreList": [
+          "BE_ERR_5203"
+        ]
+      }
+    }
+  ]
+}

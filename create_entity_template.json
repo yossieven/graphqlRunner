@@ -1,0 +1,16 @@
+{
+  "query": "",
+  "actionType": {
+    "PENDING": "CREATE_ENTITY_PENDING",
+    "SUCCESS": "CREATE_ENTITY_SUCCESS",
+    "FAILURE": "CREATE_ENTITY_FAILURE",
+    "type": "CREATE_ENTITY"
+  },
+  "variables": {
+    "links": [],
+    "remarks": [],
+    "classification": "classification_0",
+    "tags": [],
+    "permissions": []
+  }
+}

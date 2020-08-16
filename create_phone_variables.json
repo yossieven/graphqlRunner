@@ -1,0 +1,15 @@
+{
+  "entity": {
+    "type": "Phone",
+    "isTempEntity": false,
+    "phoneEntityFields": {
+      "number": "0555666554",
+      "extension": null,
+      "Imei": "1123132131",
+      "Imsi": null,
+      "type": "phone_type_2",
+      "brand": null,
+      "operatorName": "operator_name_3"
+    }
+  }
+}

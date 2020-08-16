@@ -1,0 +1,33 @@
+{
+  "query": "mutation createEntity($entity: createNewEntityInputType, $remarks: [remarkInput], $classification: String $tags: [String!], $links : [LinkBaseType]) {response: entitiesMutation {createEntity(createEntityInput: $entity) {entityId setLinks(setLinkBaseType: {links: $links}) setClassification(classification: $classification) addRemarks(createRemarks: {remarks: $remarks}) { id } setTags(setTags: $tags)}}}",
+  "actionType": {
+    "PENDING": "CREATE_ENTITY_PENDING",
+    "SUCCESS": "CREATE_ENTITY_SUCCESS",
+    "FAILURE": "CREATE_ENTITY_FAILURE",
+    "type": "CREATE_ENTITY"
+  },
+  "variables": {
+    "entity": {
+      "type": "Vehicle",
+      "isTempEntity": false,
+      "vehicleEntityFields": {
+        "engineSerial": "132145654654",
+        "passengerCapacity": "50",
+        "chassisSerial": null,
+        "licensePlateNumber": "2345678",
+        "color": "vehicle_color_3",
+        "registrationDate": "2020-08-06T15:32:33.030+0300",
+        "model": "vehicle_model_20174",
+        "type": "vehicle_type_75",
+        "brand": "vehicle_brand_530",
+        "manufactureYear": 2019,
+        "description": "just a bus"
+      }
+    },
+    "links": [],
+    "remarks": [],
+    "classification": "classification_0",
+    "tags": [],
+    "permissions": []
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "query": "\n \n\nfragment changeTracking on ChangeTrackingDataType {\n  path\n  userId\n  timestamp\n  user {\n    userName\n    displayName\n  }\n  value\n}\n\nfragment timeLocation on TimeLocationType {\n  address {\n    country\n    street\n    settlement\n    postalCode\n    externalNumber\n    internalNumber\n    state\n    floor\n    description\n    colony\n    district\n    neighborhood\n\n  }\n  addressMeta{\n    country\n    state\n    district\n    settlement\n    street\n    externalNumber\n  }\n  locationGeometries {\n    polygon {\n      coordinates\n      type\n    }\n    description\n    \n    point {\n      coordinates\n      type\n    }\n  }\n  description\n  time {\n    to\n    from\n  }\n}\n\n\n\nfragment address on AddressType {\n  country\n  street\n  settlement\n  postalCode\n  externalNumber\n  internalNumber\n  state\n  floor\n  description\n  colony\n  district\n  neighborhood\n  apartmentNumber\n}\n\nfragment location on LocationType {\n  address {\n    ...address\n  }\n  addressMeta{\n    country\n    state\n    district\n    settlement\n    street\n    externalNumber\n  }\n  locationGeometries {\n    polygon {\n      coordinates\n      type\n    }\n    description\n    aid\n    point {\n      coordinates\n      type\n    }\n  }\n  description\n}\n\nfragment file on FileType {\n   fileName: name\n   imported {\n     sourceSystem\n   }\n  \n    \n  deleted {\n    ...changeTracking\n  }\n  created {\n    ...changeTracking\n  }\n  updated {\n    ...changeTracking\n  }\n    \n    contentID\n    frozen {\n      userId\n      timestamp\n      user {\n        userName\n        displayName\n      }\n      value\n    }\n    frozenReason\n    format\n    version {\n      reference\n      minor\n      major\n      sizeInBytes\n    }\n    id\n    fileType\n    source\n    description\n    location {\n      ...timeLocation\n    }\n\n}\n\n\nfragment reportFile on ReportFileType {\n  reportName: name\n  reportType\n  notes\n  addressees\n  imported {\n    sourceSystem\n  }\n  reportType \n  \n    \n  deleted {\n    ...changeTracking\n  }\n  created {\n    ...changeTracking\n  }\n  updated {\n    ...changeTracking\n  }\n    \n    contentID\n    frozen {\n      userId\n      timestamp\n      user {\n        userName\n        displayName\n      }\n      value\n    }\n    frozenReason\n    format\n    version {\n      reference\n      minor\n      major\n      sizeInBytes\n    }\n    id\n    fileType\n    source\n    description\n    location {\n      ...timeLocation\n    }\n\n}\n\n\nfragment name on PersonNameType {\n  firstName\n  lastName\n  fatherLastName\n  motherLastName\n}\n\nfragment entity on entityResponseType {\n  userId\n  entityId\n  entityType\n  permissionLevel\n  isTempEntity\n  entityBody {\n    ... on NewsItemType {\n      subject\n      body\n      typeEnumId\n      sourceEnumId\n      \n  deleted {\n    ...changeTracking\n  }\n  created {\n    ...changeTracking\n  }\n  updated {\n    ...changeTracking\n  }\n\n      pictureDocId\n      audioDocId\n      description\n      id\n      publishDate\n    }\n    ... on FileType {\n      imported {\n        sourceSystem\n      }\n      ...file\n    }\n    ... on ReportFileType {\n      imported {\n        sourceSystem\n      }    \n      ...reportFile\n    }\n    ... on FolderType {\n      imported {\n        sourceSystem\n      }\n      id\n      description\n      \n  deleted {\n    ...changeTracking\n  }\n  created {\n    ...changeTracking\n  }\n  updated {\n    ...changeTracking\n  }\n\n      folderName: name\n    }\n    ... on VehicleType {\n      imported {\n        sourceSystem\n      }\n      \n  deleted {\n    ...changeTracking\n  }\n  created {\n    ...changeTracking\n  }\n  updated {\n    ...changeTracking\n  }\n\n      description\n      engineSerial\n      passengerCapacity\n      licensePlateNumber\n      chassisSerial\n      color\n      registrationDate\n      manufactureYear\n      model\n      type\n      brand\n      pictureDocId\n    }\n    ... on AssetType {\n      imported {\n        sourceSystem\n      }\n      \n  deleted {\n    ...changeTracking\n  }\n  created {\n    ...changeTracking\n  }\n  updated {\n    ...changeTracking\n  }\n\n      assetName: name\n      description\n      pictureDocId\n      area\n      location {\n        ...location\n      }\n      type\n    }\n    ... on OrganizationType {\n      imported {\n        sourceSystem\n      }\n      \n  deleted {\n    ...changeTracking\n  }\n  created {\n    ...changeTracking\n  }\n  updated {\n    ...changeTracking\n  }\n\n      emailAddresses {\n        address\n        type\n      }\n      description\n      companyId\n      membersCount\n      socialNetworkAccounts {\n        name\n        description\n        email {\n          address\n          type\n        }\n        network\n      }\n      activeSince\n      pictureDocId\n      companyName: name\n      websites\n      areasOfOperation\n      type\n      status\n      locations {\n        ...timeLocation\n      }\n    }\n    ... on WeaponType {\n      imported {\n        sourceSystem\n      }\n      \n  deleted {\n    ...changeTracking\n  }\n  created {\n    ...changeTracking\n  }\n  updated {\n    ...changeTracking\n  }\n\n      description\n      manufactureDate\n      caliber\n      type\n      model\n      brand\n      serialNumber\n      registrationDate\n    }\n    ... on OrderType {\n      id\n      type\n      description\n      orderName: name\n      summary\n      \n      priority\n      initialData\n      crimeTypes\n      deleted {\n        user {\n          displayName\n          isBanned\n        }\n        timestamp\n      }\n      created {\n        timestamp\n        user {\n          userName\n          displayName\n          roles\n        }\n      }\n      updated {\n        timestamp\n        user {\n          userName\n          displayName\n          roles\n        }\n      }\n    }\n    ... on PhoneType {\n      imported {\n        sourceSystem\n      }\n      description\n      id\n      Imei\n      Imsi\n      operatorName\n      number\n      type\n      \n  deleted {\n    ...changeTracking\n  }\n  created {\n    ...changeTracking\n  }\n  updated {\n    ...changeTracking\n  }\n\n    }\n    ... on CaseType {\n      id\n      type\n      description\n      caseName: name\n      description\n      summary\n      sourceSystemKey\n      sourceSystem\n      priority\n      crimeCharacteristics\n      sourceDocumentId\n      sourceUserId\n      initialData\n      crimeTypes\n      \n  deleted {\n    ...changeTracking\n  }\n  created {\n    ...changeTracking\n  }\n  updated {\n    ...changeTracking\n  }\n\n    }\n    ... on PersonType {\n      imported {\n        sourceSystem\n      }\n      description\n      \n  deleted {\n    ...changeTracking\n  }\n  created {\n    ...changeTracking\n  }\n  updated {\n    ...changeTracking\n  }\n\n      id\n      addresses {\n        ...timeLocation\n      }\n      occupation\n      education {\n        institution\n        subject\n        start\n        end\n        diploma\n      }\n      gender\n      RfcNumber\n      dateOfBirth\n      dateOfDeath\n      ImssNumber\n      legalCitizen\n      socialNetworkAccounts {\n        name\n        description\n        email {\n          address\n          type\n        }\n        network\n      }\n      medicalData {\n        treatmentLocation {\n          ...location\n        }\n        treatmentTime {\n          from\n          to\n        }\n        description\n        fileDocId\n      }\n      alsoKnownAs\n      visaToUs\n      IfeNumber\n      bloodGroup\n      SmnNumber\n      emailAddresses {\n        address\n        type\n      }\n      licenses {\n        country\n        number\n        expires\n        name {\n          ...name\n        }\n        pictureDocId\n        state\n        type\n      }\n      CurpNumber\n      nicknames\n      borderCrossings {\n        border\n        country\n        isDeparture\n        description\n        timestamp\n      }\n      languages\n      placeOfBirth {\n        ...address\n      }\n      passports {\n        name {\n          ...name\n        }\n        country\n        number\n        expires\n      }\n      religion\n      nationality\n      name {\n        ...name\n      }\n      ethnicGroup\n      maritalStatus\n      pictureDocId\n      audioDocId\n      physicalCharacteristics {\n        accent\n        tattoo \n        height\n        eyeSize\n        eyeColor\n        eyeShape\n        bodyType\n        noseType\n        hairType\n        lipsType\n        hairSize\n        hairColor\n        description\n        marks\n      }\n      coronaCharacteristics {\n        coronaStatus\n      }\n      criminalRecord {\n        type\n        start\n        end\n        description\n      }\n    }\n    ... on PirType {\n      id\n      pirName\n      pirRequest {\n        pirType\n        priority\n        requiredDueDate\n      }\n      created {\n        userId\n        timestamp\n        user {\n          userName\n          displayName\n        }\n      }\n      workflow {\n        workflow {\n          state\n          wfExternalSystemStatus\n          externalSystemType\n        }\n      }\n    }\n  }\n}\nmutation updateEntity(\n  $sourceId: String,\n  $entity : createNewEntityInputType,\n  $links : [LinkBaseType]\n) {\n  entitiesMutation {\n    updateEntity(updateEntityInput: $entity) {\n      ...entity     \n    }\n  }\n  links {\n    setLinks(setLinkBaseType: { links: $links, sourceId: $sourceId })\n  }\n}\n",
+  "actionType": {
+    "PENDING": "UPDATE_ENTITY_PENDING",
+    "SUCCESS": "UPDATE_ENTITY_SUCCESS",
+    "FAILURE": "UPDATE_ENTITY_FAILURE",
+    "type": "UPDATE_ENTITY"
+  },
+  "variables": {
+    "entityId": "PH1549",
+    "sourceId": "PH1549",
+    "entity": {
+      "id": "PH1549",
+      "type": "Phone",
+      "isTempEntity": false,
+      "phoneEntityFields": {
+        "imported": null,
+        "description": null,
+        "id": "PH1549",
+        "Imei": null,
+        "Imsi": null,
+        "operatorName": null,
+        "number": "55555555",
+        "type": null
+      }
+    },
+    "links": []
+  },
+  "onSuccessAction": {
+    "type": "GRAPHQL_QUERY",
+    "meta": {
+      "entityId": "PH1549",
+      "notifications": {
+        "error": {
+          "title": "toasts.UNLOCK_ENTITY_FAILURE.title",
+          "message": "toasts.UNLOCK_ENTITY_FAILURE.message",
+          "status": "error",
+          "values": {
+            "entityId": "PH1549"
+          }
+        }
+      }
+    },
+    "payload": {
+      "query": "\nmutation unlockQuery($entityId: String!, $lockName: String) {\n  response: lockAndQuery {\n    lock {\n      unlockEntity(unlockInput: { entityId: $entityId, lockName: $lockName }) {\n        success\n        lockingUser {\n          userName\n          displayName\n        }\n      }\n    }\n  }\n}\n",
+      "actionType": {
+        "PENDING": "UNLOCK_ENTITY_PENDING",
+        "SUCCESS": "UNLOCK_ENTITY_SUCCESS",
+        "FAILURE": "UNLOCK_ENTITY_FAILURE",
+        "type": "UNLOCK_ENTITY"
+      },
+      "variables": {
+        "entityId": "PH1549"
+      }
+    }
+  }
+}
