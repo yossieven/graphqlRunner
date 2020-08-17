@@ -19,7 +19,6 @@ with the data expected to reside within it.
 
 
 class GraphQLRunner:
-
     login_string: str
 
     def __init__(self, action: int, username, password, role):
@@ -64,7 +63,7 @@ class GraphQLRunner:
 
     def prepare_request(self, sections):
 
-        for key in [k for k in sections if k != 'self']:
+        for key in sections:
             if sections[key] is not None and sections[key] != '':
                 with open(sections[key]) as json_file:
                     data = json_file.read()
@@ -119,13 +118,11 @@ class GraphQLRunner:
 
 
 if __name__ == '__main__':
-    with open('create_phone_variables.json') as json_file:
-        variables_data = json_file.read()
     action = None
 
     print("Please Choose an Action:\n")
-    for key in config.ACTIONS_TEMPLATES:
-        print(str(key) + ") " + config.ACTIONS_TEMPLATES[key]["name"] + "\n")
+    for aKey in config.ACTIONS_TEMPLATES:
+        print(str(aKey) + ") " + config.ACTIONS_TEMPLATES[aKey]["name"] + "\n")
 
     try:
         action = int(input(">>> "))
@@ -135,12 +132,12 @@ if __name__ == '__main__':
         action = None
 
     if sys.platform.startswith('linux'):
-        clear = lambda: os.system('clear')
+        os.system('clear')
     else:
-        clear = lambda: os.system('cls')
-    clear()
-    for key in config.SECTIONS:
-        config.SECTIONS[key] = input("\n " + key + ": Enter name of json file : ")
+        os.system('cls')
+
+    for aKey in config.SECTIONS:
+        config.SECTIONS[aKey] = input("\n " + aKey + ": Enter name of json file : ")
 
     graphQLRunner = GraphQLRunner(action, config.USER, config.PASSWORD, config.ROLE)
     graphQLRunner.prepare_request(config.SECTIONS)
