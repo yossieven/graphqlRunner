@@ -62,10 +62,7 @@ class GraphQLRunner:
                 else:
                     self.replace_object_in_dict(key, dictionary[k], value)
 
-    def prepare_request(self, variables=None, links=None, remarks=None, tags=None,
-                        classification=None, permissions=None):
-
-        sections = {'variables': variables, 'links': links, 'remarks': remarks, 'tags': tags, 'classification': classification, 'permissions': permissions}
+    def prepare_request(self, sections):
 
         for key in [k for k in sections if k != 'self']:
             if sections[key] is not None and sections[key] != '':
@@ -124,35 +121,26 @@ class GraphQLRunner:
 if __name__ == '__main__':
     with open('create_phone_variables.json') as json_file:
         variables_data = json_file.read()
-    # with open('create_phone_links.json') as json_file:
-    #     links_data = json_file.read()
-    # with open('create_phone_remarks.json') as json_file:
-    #     remarks_data = json_file.read()
-    # with open('create_phone_tags.json') as json_file:
-    #     tags_data = json_file.read()
-    # with open('create_phone_classification.json') as json_file:
-    #     classification_data = json_file.read()
-    # with open('create_phone_permissions.json') as json_file:
-    #     permissions_data = json_file.read()
     action = None
-    while action is None:
-        try:
-            action = int(input("Please choose action: \n (1) Create New Phone \n (2) Create New Vehicle \n (3) Create News \n Action >> "))
-        except TypeError:
-            action = None
-        except ValueError:
-            action = None
+
+    print("Please Choose an Action:\n")
+    for key in config.ACTIONS_TEMPLATES:
+        print(str(key) + ") " + config.ACTIONS_TEMPLATES[key]["name"] + "\n")
+
+    try:
+        action = int(input(">>> "))
+    except TypeError:
+        action = None
+    except ValueError:
+        action = None
 
     if sys.platform.startswith('linux'):
         clear = lambda: os.system('clear')
     else:
         clear = lambda: os.system('cls')
     clear()
-    variables_data = input("\n Variables: Enter name of json file : ")
-    links_data = input("\n Links: Enter name of json file : ")
-    tags_data = input("\n Tags: Enter name of json file : ")
-    remarks_data = input("\n Remarks: Enter name of json file : ")
-    permissions_data = input("\n Permissions: Enter name of json file : ")
+    for key in config.SECTIONS:
+        config.SECTIONS[key] = input("\n " + key + ": Enter name of json file : ")
 
-    graphQLRunner = GraphQLRunner(action, 'wstu9', 'Pass123', 'system_role_analyst')
-    graphQLRunner.prepare_request(variables=variables_data)
+    graphQLRunner = GraphQLRunner(action, config.USER, config.PASSWORD, config.ROLE)
+    graphQLRunner.prepare_request(config.SECTIONS)

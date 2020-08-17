@@ -5,15 +5,24 @@ CREATE_VEHICLE_QUERY = "mutation createEntity($entity: createNewEntityInputType,
 CREATE_NEWS_QUERY = "mutation saveNewsDraft($newsDraft: newsItemDraftInputType!, $newsDraftId: String!, $classificationId: String!, $tags: [String], , $links: [LinkBaseType!]){  newsItem{    updateDraft(newsItemDraft: $newsDraft){      body        priorityEnumId        reliabilityEnumId        sourceEnumId        sourceName        sourceCredibilityEnumId        subject        typeEnumId        crimeTypeEnumIds        occurrenceTime {          startTime          endTime        }        id        locations{          address{            floor            state            colony            street            postalCode            country            district            settlement            description            neighborhood            externalNumber            internalNumber            apartmentNumber          }          addressMeta{            country            state            district            settlement            street            externalNumber          }          time{            from            to          }          description          locationGeometries{            point{              type              coordinates            }            polygon{              type              coordinates            }            description          }      }    }  }  permissions{  setClassification(setClassificationInput: {classification: $classificationId, entityId: $newsDraftId})}tags{  setTags(setTagsInput:{entityId: $newsDraftId,tagEnumIds: $tags}){    tagEnumId  }}links {  setLinks(setLinkBaseType: {links: $links, sourceId: $newsDraftId})}}"
 ACTIONS_TEMPLATES = {
     1: {
+        "name": "Create New Phone Entity",
         "template": "create_entity_template.json",
         "query": CREATE_PHONE_QUERY
     },
     2: {
+        "name": "Create New Vehicle Entity",
         "entity": "create_entity_template.json",
         "query": CREATE_VEHICLE_QUERY
     },
     3: {
+        "name": "Create News Item",
         "entity": "create_news_template.json",
         "query": CREATE_NEWS_QUERY
     }
 }
+SECTIONS = {'variables': None, 'links': None, 'remarks': None, 'tags': None, 'classification': None,
+            'permissions': None}
+
+USER = "wstu9"
+PASSWORD = "Pass123"
+ROLE = "system_role_analyst"

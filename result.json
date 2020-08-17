@@ -7,7 +7,24 @@
         "type": "CREATE_ENTITY"
     },
     "variables": {
-        "links": [],
+        "links": [
+            {
+                "id": null,
+                "sourceId": null,
+                "sourceType": "Phone",
+                "targetId": "PH1535",
+                "targetType": "Phone",
+                "relationType": "phone_phone_rel",
+                "relationValue": "phone_phone_rel_3",
+                "endDate": "2020-08-11T00:00:00.000+0300",
+                "startDate": "2020-08-10T00:00:00.000+0300",
+                "intensity": 4,
+                "reliability": 1,
+                "isNew": true,
+                "direction": 1,
+                "toDelete": false
+            }
+        ],
         "remarks": [],
         "classification": "classification_0",
         "tags": [],
